@@ -35,7 +35,7 @@ class UserServiceTest extends TestCase
         self::assertTrue(password_verify($response->user->password, $request->password));
     }
 
-    public function testDaftarValidationExcep()
+    public function testDaftarGagal()
     {
         self::expectException(ValidationException::class);
         $request = new UserDaftarRequest();
@@ -56,7 +56,7 @@ class UserServiceTest extends TestCase
         $this->userRepository->save($user);
 
         self::expectException(ValidationException::class);
-        
+
         $request = new UserDaftarRequest();
         $request->nama = "Zaidun";
         $request->username = "zaid97";
