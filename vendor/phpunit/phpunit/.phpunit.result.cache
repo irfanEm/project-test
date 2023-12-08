@@ -1,0 +1,1 @@
+{"version":1,"defects":{"PRGANYRN\\PROJECT\\TEST\\Config\\DatabaseTest::testDBConnect":8,"PRGANYRN\\PROJECT\\TEST\\Config\\DatabaseTest::testDBConnectSingleton":8},"times":{"PRGANYRN\\PROJECT\\TEST\\Config\\DatabaseTest::testDBConnect":0.009,"PRGANYRN\\PROJECT\\TEST\\Config\\DatabaseTest::testDBConnectSingleton":0}}
