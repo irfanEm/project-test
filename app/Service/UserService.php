@@ -4,12 +4,14 @@ declare(strict_types=1);
 
 namespace PRGANYRN\PROJECT\TEST\Service;
 
-use PRGANYRN\PROJECT\TEST\Config\Database;
 use PRGANYRN\PROJECT\TEST\Domain\User;
-use PRGANYRN\PROJECT\TEST\Exception\ValidationException;
+use PRGANYRN\PROJECT\TEST\Config\Database;
+use PRGANYRN\PROJECT\TEST\Model\UserLoginRequest;
 use PRGANYRN\PROJECT\TEST\Model\UserDaftarRequest;
+use PRGANYRN\PROJECT\TEST\Model\UserLoginResponse;
 use PRGANYRN\PROJECT\TEST\Model\UserDaftarResponse;
 use PRGANYRN\PROJECT\TEST\Repository\UserRepository;
+use PRGANYRN\PROJECT\TEST\Exception\ValidationException;
 
 class UserService
 {
@@ -23,7 +25,7 @@ class UserService
 
     public function daftar(UserDaftarRequest $request): UserDaftarResponse
     {
-        $this->validationUserDaftar($request);
+        $this->validasiUserDaftar($request);
 
         try{
             Database::beginTransaction();
@@ -52,12 +54,39 @@ class UserService
         }
     }
 
-    protected function validationUserDaftar(UserDaftarRequest $request): void
+    protected function validasiUserDaftar(UserDaftarRequest $request): void
     {
         if($request->nama == null || $request->username == null || $request->password == null ||
         trim($request->nama) == "" || trim($request->username) == "" || trim($request->password) == "")
         {
             throw new ValidationException("Nama, username, password aja kosong !");
+        }
+    }
+
+    public function login(UserLoginRequest $request): UserLoginResponse
+    {
+        $this->validasiUserLogin($request);
+
+        $user = $this->userRepository->findByUsername($request->username);
+        if($user == null){
+            throw new ValidationException("Username ra ketemu !");
+        }
+
+        if(password_verify($request->password, $user->password))
+        {
+            $response = new UserLoginResponse();
+            $response->user = $user;
+            return $response;
+        }else{
+            throw new ValidationException("Username / passworde salah !");
+        }
+    }
+
+    protected function validasiUserLogin(UserLoginRequest $request)
+    {
+        if($request->username == null || $request->password == null ||
+        trim($request->username) == "" || trim($request->password) == ""){
+            throw new ValidationException("Username karo password raulih kosong !");
         }
     }
 }
