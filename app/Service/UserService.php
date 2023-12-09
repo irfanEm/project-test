@@ -30,7 +30,7 @@ class UserService
 
             $user = $this->userRepository->findByUsername($request->username);
             if($user != null){
-                throw new ValidationException("Username wis kanggo!");
+                throw new ValidationException("Username wis kanggo !");
             }
             
             $user = new User();
@@ -57,7 +57,7 @@ class UserService
         if($request->nama == null || $request->username == null || $request->password == null ||
         trim($request->nama) == "" || trim($request->username) == "" || trim($request->password) == "")
         {
-            throw new ValidationException("Nama, username, password aja kosong!");
+            throw new ValidationException("Nama, username, password aja kosong !");
         }
     }
 }
