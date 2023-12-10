@@ -1,11 +1,14 @@
 <div class="container col-xl-10 col-xxl-8 px-4 py-5">
+
   <?php if(isset($model['error'])) { ?>
-      <div class="row">
-        <div class="alert alert-danger" role="alert">
+    <div class="row">
+      <div class="alert alert-danger alert-dismissible" role="alert">
           <?= $model['error'] ?>
-        </div>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"button>
       </div>
+    </div>
   <?php } ?>
+
   <div class="row align-items-center g-lg-5 py-5">
     <div class="col-lg-7 text-center text-lg-start">
       <h1 class="display-4 fw-bold lh-1 mb-3"><?= $model['heading'] ?></h1>
@@ -39,10 +42,10 @@
             type="text"
             class="form-control"
             id="username"
-            placeholder="username"
+            placeholder="Email"
             value="<?= $_POST['username'] ?? '' ?>"
           />
-          <label for="username">Username</label>
+          <label for="username">Email</label>
         </div>
         <div class="form-floating mb-3">
           <input
@@ -54,9 +57,17 @@
           />
           <label for="password">Password</label>
         </div>
-        <button class="w-100 btn btn-lg btn-primary" type="submit">
+        <button class="w-100 btn btn-lg btn-primary mb-3" type="submit">
           Register
         </button>
+
+        <p class="text-center">
+            <span>Wis due akun ? </span>
+            <a href="/auth/login">
+              <span>Login nang kene</span>
+            </a>
+        </p>
+
       </form>
     </div>
   </div>

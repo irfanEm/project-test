@@ -9,7 +9,7 @@ class HomeController
     public function index()
     {
         View::view('Home/index', [
-            "title" => "Homepage",
+            "title" => "Dashboard",
         ]);
     }
 
