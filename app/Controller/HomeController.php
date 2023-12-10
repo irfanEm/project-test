@@ -6,6 +6,7 @@ use PRGANYRN\PROJECT\TEST\App\View;
 
 class HomeController
 {
+    // private SessionService $sessionService;
     public function index()
     {
         View::view('Home/index', [
