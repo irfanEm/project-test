@@ -79,4 +79,10 @@ class UserController
             ]);
         }
     }
+
+    public function logout()
+    {
+        $this->sessionService->hapus();
+        View::redirect("/auth/login");
+    }
 }

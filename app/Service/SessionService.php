@@ -10,7 +10,7 @@ use PRGANYRN\PROJECT\TEST\Repository\UserRepository;
 
 class SessionService
 {
-    private static $COOKIE_NAME = "IRFANEM";
+    public static $COOKIE_NAME = "IRFANEM";
     private SessionRepository $sessionRepository;
     private UserRepository $userRepository;
 
@@ -50,7 +50,7 @@ class SessionService
             return null;
         }
 
-        return $this->userRepository->findById($session->user_id);
+        return $this->userRepository->findByUsername($session->user_id);
     }
 
 }
