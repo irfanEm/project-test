@@ -36,8 +36,8 @@ class SessionServiceTest extends TestCase
         $session = $this->sessionService->buat("test@email.com");
         self::expectOutputRegex("[IRFANEM: $session->id]");
 
-        $hasil = $this->sessionRepository->findById($session->id);
-        self::assertEquals("test@email.com", $hasil->id);
+        $result = $this->sessionRepository->findById($session->id);
+        self::assertEquals('test@email.com', $result->user_id);
     }
 
     public function testHapus()
@@ -52,7 +52,7 @@ class SessionServiceTest extends TestCase
 
         self::expectOutputRegex("[IRFANEM: ]");
 
-        $hasil = $this->sessionRepository->findById($session->id);
+        $hasil = $this->sessionRepository->deleteById($session->id);
 
         self::assertNull($hasil);
     }

@@ -2,7 +2,6 @@
 
 namespace PRGANYRN\PROJECT\TEST\Service;
 
-use PRGANYRN\PROJECT\TEST\Config\Database;
 use PRGANYRN\PROJECT\TEST\Domain\Session;
 use PRGANYRN\PROJECT\TEST\Domain\User;
 use PRGANYRN\PROJECT\TEST\Repository\SessionRepository;
@@ -10,14 +9,14 @@ use PRGANYRN\PROJECT\TEST\Repository\UserRepository;
 
 class SessionService
 {
-    public static $COOKIE_NAME = "IRFANEM";
+    public static string $COOKIE_NAME = "IRFANEM";
     private SessionRepository $sessionRepository;
     private UserRepository $userRepository;
 
-    public function __construct()
+    public function __construct(SessionRepository $sessionRepository, UserRepository $userRepository)
     {
-        $this->sessionRepository = new SessionRepository(Database::getConnection());
-        $this->userRepository = new UserRepository(Database::getConnection());
+        $this->sessionRepository = $sessionRepository;
+        $this->userRepository = $userRepository;
     }
 
     public function buat(string $user_id): Session
@@ -35,10 +34,10 @@ class SessionService
 
     public function hapus()
     {
-        $sessionId = $_COOKIE[self::$COOKIE_NAME] ?? "";
+        $sessionId = $_COOKIE[self::$COOKIE_NAME] ?? '';
         $this->sessionRepository->deleteById($sessionId);
 
-        setcookie(self::$COOKIE_NAME,"", 1, "/");
+        setcookie(self::$COOKIE_NAME, "", 1, "/");
     }
 
     public function terkini(): ?User

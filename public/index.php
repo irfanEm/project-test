@@ -16,6 +16,6 @@ Route::add("GET", "/auth/daftar", UserController::class, "daftar", [TamuMiddlewa
 Route::add("POST", "/auth/daftar", UserController::class, "postDaftar", [TamuMiddleware::class]);
 Route::add("GET", "/auth/login", UserController::class, "login", [TamuMiddleware::class]);
 Route::add("POST", "/auth/login", UserController::class, "postLogin", [TamuMiddleware::class]);
-Route::add("GET", "/auth/logout", UserController::class, "logout", [TamuMiddleware::class]);
+Route::add("GET", "/auth/logout", UserController::class, "logout", [AuthMiddleware::class]);
 
 Route::gas();

@@ -17,7 +17,7 @@ class SessionRepository
 
     public function simpan(Session $session): Session
     {
-        $statement = $this->pdo->prepare("INSERT INTO sessions VALUES (?, ?)");
+        $statement = $this->pdo->prepare("INSERT INTO sessions(id, user_id) VALUES (?, ?)");
         $statement->execute([$session->id, $session->user_id]);
         return $session;
     }
