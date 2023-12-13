@@ -12,6 +12,8 @@ use PRGANYRN\PROJECT\TEST\Model\UserLoginResponse;
 use PRGANYRN\PROJECT\TEST\Model\UserDaftarResponse;
 use PRGANYRN\PROJECT\TEST\Repository\UserRepository;
 use PRGANYRN\PROJECT\TEST\Exception\ValidationException;
+use PRGANYRN\PROJECT\TEST\Model\DataPembaruanUserRequest;
+use PRGANYRN\PROJECT\TEST\Model\DataPembaruanUserResponse;
 
 class UserService
 {
@@ -87,6 +89,41 @@ class UserService
         if($request->username == null || $request->password == null ||
         trim($request->username) == "" || trim($request->password) == ""){
             throw new ValidationException("Username karo password raulih kosong !");
+        }
+    }
+
+    public function perbarui(DataPembaruanUserRequest $request): DataPembaruanUserResponse
+    {
+        $this->validasiDataPembaruanUser($request);
+        try{
+            Database::beginTransaction();
+
+            $user = $this->userRepository->findByUsername($request->username);
+            if($user == null){
+                throw new ValidationException("User ra ana !");
+            }
+
+            $user->nama = $request->nama;
+            $user->username = $request->username;
+
+            $this->userRepository->update($user);
+
+            Database::commitTransaction();
+
+            $response = new DataPembaruanUserResponse();
+            $response->user = $user;
+            return $response;
+        }catch(\Exception $err){
+            Database::rollback();
+            throw $err;
+        }
+    }
+
+    protected function validasiDataPembaruanUser(DataPembaruanUserRequest $request)
+    {
+        if($request->username == null || $request->nama == null ||
+        trim($request->username) == "" || trim($request->nama) == ""){
+            throw new ValidationException("Username karo namane aja kosong !");
         }
     }
 }

@@ -2,8 +2,14 @@
 
 namespace PRGANYRN\PROJECT\TEST\App;
 
+use PRGANYRN\PROJECT\TEST\Config\Database;
+use PRGANYRN\PROJECT\TEST\Repository\SessionRepository;
+use PRGANYRN\PROJECT\TEST\Repository\UserRepository;
+use PRGANYRN\PROJECT\TEST\Service\SessionService;
+
 class View
 {
+    
     public static function view(string $view, array $model): void
     {
         require_once __DIR__ . "/../View/Templates/header.php";

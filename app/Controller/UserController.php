@@ -5,6 +5,7 @@ namespace PRGANYRN\PROJECT\TEST\Controller;
 use PRGANYRN\PROJECT\TEST\App\View;
 use PRGANYRN\PROJECT\TEST\Config\Database;
 use PRGANYRN\PROJECT\TEST\Exception\ValidationException;
+use PRGANYRN\PROJECT\TEST\Model\DataPembaruanUserRequest;
 use PRGANYRN\PROJECT\TEST\Model\UserDaftarRequest;
 use PRGANYRN\PROJECT\TEST\Model\UserLoginRequest;
 use PRGANYRN\PROJECT\TEST\Repository\SessionRepository;
@@ -84,5 +85,42 @@ class UserController
     {
         $this->sessionService->hapus();
         View::redirect("/auth/login");
+    }
+
+    public function perbaruiProfil()
+    {
+        $user = $this->sessionService->terkini();
+
+        View::view("User/perbarui", [
+            "title" => "Pembaruan profil",
+            "heading" => "Pembaruan profil",
+            "user" => [
+                "nama" => $user->nama,
+                "username" => $user->username
+            ]
+        ]);
+    }
+
+    public function postPerbaruiProfil()
+    {
+        $user = $this->sessionService->terkini();
+
+        $request = new DataPembaruanUserRequest();
+        $request->nama = $_POST['nama'];
+        $request->username = $_POST['username'];
+
+        try{
+            $this->userService->perbarui($request);
+            View::redirect('/');
+        }catch(ValidationException $err){
+            View::view("User/perbarui",[
+                "title" => "Pembaruan profil",
+                "heading" => "Pembaruan profil user",
+                "user" => [
+                    "nama" => $user->nama,
+                    "username" => $user->username
+                ]
+            ]);
+        }
     }
 }
