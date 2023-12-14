@@ -91,7 +91,7 @@ class UserController
     {
         $user = $this->sessionService->terkini();
 
-        View::view("User/perbarui", [
+        View::view_user("User/perbarui", [
             "title" => "Pembaruan profil",
             "heading" => "Pembaruan profil",
             "user" => [

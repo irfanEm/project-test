@@ -17,6 +17,13 @@ class View
         require_once __DIR__ . "/../View/Templates/footer.php";
     }
 
+    public static function view_user(string $view, array $model): void
+    {
+        require_once __DIR__ . "/../View/Templates/header-user.php";
+        require_once __DIR__ . "/../View/" . $view . ".php";
+        require_once __DIR__ . "/../View/Templates/footer-user.php";
+    }
+
     public static function redirect(string $url): void
     {
         header("Location: $url");
