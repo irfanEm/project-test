@@ -3,10 +3,15 @@
                         <div class="col-lg-12 mb-4 order-0">
                         <div class="card">
                             <div class="d-flex align-items-end row">
-                                <div class="col-sm-12">
+                                <div class="col-sm-6">
                                     <div class="card-header">
                                         <h4>Perbarui profil</h4>
                                     </div>
+                                    <div class="card-body">
+                                        <h1>image</h1>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
                                     <div class="card-body">
                                         <div class="form-floating mb-3">
                                             <input type="text" class="form-control" id="nama" name="nama" placeholder="Nama" aria-describedby="floatingInputHelp" value="<?= $model['user']['nama'] ?? "" ?>">
