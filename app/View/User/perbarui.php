@@ -1,4 +1,12 @@
             <div class="container-xxl flex-grow-1 container-p-y">
+
+                <?php if(isset($model['error'])) { ?>
+                        <div class="alert alert-danger alert-dismissible" role="alert">
+                            <?= $model['error'] ?>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"button>
+                        </div>
+                <?php } ?>
+
                 <div class="row fv-plugins-icon-container">
                     <div class="col-md-12">
                         <div class="card mb-4">
@@ -24,11 +32,11 @@
                             </div>
                         <hr class="my-0">
                             <div class="card-body">
-                            <form id="formAccountSettings" method="POST" onsubmit="return false" class="fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+                            <form id="formAccountSettings" method="POST" action="/user/perbarui" class="fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
                                 <div class="row">
                                     <div class="mb-3 col-md-6 fv-plugins-icon-container">
                                         <label for="nama" class="form-label">Nama Lengkap</label>
-                                        <input class="form-control" type="text" id="nama" name="nama" value="<?= $model['user']['nama'] ?? "" ?>" autofocus="">
+                                        <input class="form-control" type="text" id="nama" name="nama" value="<?= $model['user']['nama'] ?? "" ?>">
                                     <div class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback"></div>
                                     </div>
                                     <div class="mb-3 col-md-6 fv-plugins-icon-container">

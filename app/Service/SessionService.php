@@ -49,7 +49,7 @@ class SessionService
             return null;
         }
 
-        return $this->userRepository->findByUsername($session->user_id);
+        return $this->userRepository->findById($session->user_id);
     }
 
 }

@@ -1,12 +1,10 @@
 <div class="container col-xl-10 col-xxl-8 px-4 py-5">
   
         <?php if(isset($model['error'])) { ?>
-          <div class="row">
             <div class="alert alert-danger alert-dismissible" role="alert">
                 <?= $model['error'] ?>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"button>
             </div>
-          </div>
         <?php } ?>
 
       <div class="row align-items-center g-lg-5 py-5">

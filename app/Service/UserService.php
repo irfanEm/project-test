@@ -98,7 +98,7 @@ class UserService
         try{
             Database::beginTransaction();
 
-            $user = $this->userRepository->findByUsername($request->username);
+            $user = $this->userRepository->findById($request->id);
             if($user == null){
                 throw new ValidationException("User ra ana !");
             }

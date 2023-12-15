@@ -70,7 +70,7 @@ class UserController
 
         try{
             $response = $this->userService->login($request);
-            $this->sessionService->buat($response->user->username);
+            $this->sessionService->buat($response->user->id);
             View::redirect('/');
         }catch(ValidationException $err){
             View::view("Auth/login", [
@@ -106,6 +106,7 @@ class UserController
         $user = $this->sessionService->terkini();
 
         $request = new DataPembaruanUserRequest();
+        $request->id = $user->id;
         $request->nama = $_POST['nama'];
         $request->username = $_POST['username'];
 
@@ -113,9 +114,10 @@ class UserController
             $this->userService->perbarui($request);
             View::redirect('/');
         }catch(ValidationException $err){
-            View::view("User/perbarui",[
+            View::view_user("User/perbarui",[
                 "title" => "Pembaruan profil",
                 "heading" => "Pembaruan profil user",
+                "error" => $err->getMessage(),
                 "user" => [
                     "nama" => $user->nama,
                     "username" => $user->username
