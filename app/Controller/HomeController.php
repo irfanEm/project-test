@@ -37,4 +37,11 @@ class HomeController
         ]);
     }
 
+    public function editView()
+    {
+        View::view('edit', [
+            "title" => "not found"
+        ]);
+    }
+
 }

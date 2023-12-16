@@ -9,6 +9,7 @@ use PRGANYRN\PROJECT\TEST\Middleware\AuthMiddleware;
 use PRGANYRN\PROJECT\TEST\Middleware\TamuMiddleware;
 
 Route::add("GET", "/", HomeController::class, "index", [AuthMiddleware::class]);
+Route::add("GET", "/edit", HomeController::class, "editView", [TamuMiddleware::class]);
 Route::add("GET", "/errors/notfound", HomeController::class, "error", []);
 Route::add("GET", "/test/url", TestController::class, "TestFunction", []);
 Route::add("GET", "/test/url/([0-9a-zA-Z]*)/([0-9a-zA-Z]*)", TestController::class, "TestFunctionReg", []);
