@@ -11,6 +11,8 @@ use PRGANYRN\PROJECT\TEST\Model\UserDaftarRequest;
 use PRGANYRN\PROJECT\TEST\Model\UserLoginResponse;
 use PRGANYRN\PROJECT\TEST\Model\UserDaftarResponse;
 use PRGANYRN\PROJECT\TEST\Repository\UserRepository;
+use PRGANYRN\PROJECT\TEST\Model\DataRequestSandiUser;
+use PRGANYRN\PROJECT\TEST\Model\DataResponseSandiUser;
 use PRGANYRN\PROJECT\TEST\Exception\ValidationException;
 use PRGANYRN\PROJECT\TEST\Model\DataPembaruanUserRequest;
 use PRGANYRN\PROJECT\TEST\Model\DataPembaruanUserResponse;
@@ -124,6 +126,50 @@ class UserService
         if($request->username == null || $request->nama == null ||
         trim($request->username) == "" || trim($request->nama) == ""){
             throw new ValidationException("Username karo namane aja kosong !");
+        }
+    }
+
+    public function perbaruiSandi(DataRequestSandiUser $request): DataResponseSandiUser
+    {
+        $this->validasiDataPembaruanSandi($request);
+
+        try{
+            Database::beginTransaction();
+            $user = $this->userRepository->findById($request->id);
+
+            if($request->sandiBaru != $request->konfirmasiSandiBaru)
+            {
+                throw new ValidationException("Konfirmasi sandi kudu pada !");
+            }
+
+            if(!password_verify($request->sandiLama, $user->password))
+            {
+                throw new ValidationException("Sandi lama salah !");
+            }
+
+            $user->password = password_hash($request->sandiBaru, PASSWORD_BCRYPT);
+            $this->userRepository->update($user);
+
+            Database::commitTransaction();
+
+            $response = new DataResponseSandiUser();
+            $response->user = $user;
+            return $response;
+            
+        }catch(\Exception $err){
+            Database::rollback();
+            throw $err;
+
+        }
+
+    }
+
+    protected function validasiDataPembaruanSandi(DataRequestSandiUser $request): void
+    {
+        if($request->sandiLama == null || $request->sandiBaru == null || $request->konfirmasiSandiBaru == null
+        || trim($request->sandiLama) == '' || trim($request->sandiBaru) == '' || trim($request->konfirmasiSandiBaru) == '')
+        {
+            throw new ValidationException("Sandi Lama, Baru karo Konfirmasi sandi diisi !");
         }
     }
 }

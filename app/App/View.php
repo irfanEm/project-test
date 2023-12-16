@@ -2,11 +2,6 @@
 
 namespace PRGANYRN\PROJECT\TEST\App;
 
-use PRGANYRN\PROJECT\TEST\Config\Database;
-use PRGANYRN\PROJECT\TEST\Repository\SessionRepository;
-use PRGANYRN\PROJECT\TEST\Repository\UserRepository;
-use PRGANYRN\PROJECT\TEST\Service\SessionService;
-
 class View
 {
     

@@ -6,6 +6,7 @@ use PRGANYRN\PROJECT\TEST\App\View;
 use PRGANYRN\PROJECT\TEST\Config\Database;
 use PRGANYRN\PROJECT\TEST\Exception\ValidationException;
 use PRGANYRN\PROJECT\TEST\Model\DataPembaruanUserRequest;
+use PRGANYRN\PROJECT\TEST\Model\DataRequestSandiUser;
 use PRGANYRN\PROJECT\TEST\Model\UserDaftarRequest;
 use PRGANYRN\PROJECT\TEST\Model\UserLoginRequest;
 use PRGANYRN\PROJECT\TEST\Repository\SessionRepository;
@@ -112,7 +113,7 @@ class UserController
 
         try{
             $this->userService->perbarui($request);
-            View::redirect('/');
+            View::redirect('/user/perbarui');
         }catch(ValidationException $err){
             View::view_user("User/perbarui",[
                 "title" => "Pembaruan profil",
@@ -122,6 +123,28 @@ class UserController
                     "nama" => $user->nama,
                     "username" => $user->username
                 ]
+            ]);
+        }
+    }
+
+    public function postUbahSandi()
+    {
+        $user = $this->sessionService->terkini();
+
+        $request = new DataRequestSandiUser();
+        $request->id = $user->id;
+        $request->sandiLama = $_POST['sandiLama'];
+        $request->sandiBaru = $_POST['sandiBaru'];
+        $request->konfirmasiSandiBaru = $_POST['konfirmasiSandi'];
+
+        try{
+            $this->userService->perbaruiSandi($request);
+            View::redirect('/user/perbarui');
+        }catch(\Exception $err){
+            View::view_user("User/perbarui",[
+                "title" => "Pembaruan profil",
+                "heading" => "Pembaruan profil user",
+                "error" => $err->getMessage()
             ]);
         }
     }

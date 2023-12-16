@@ -20,5 +20,6 @@ Route::add("POST", "/auth/login", UserController::class, "postLogin", [TamuMiddl
 Route::add("GET", "/auth/logout", UserController::class, "logout", [AuthMiddleware::class]);
 Route::add("GET", "/user/perbarui", UserController::class, "perbaruiProfil", [AuthMiddleware::class]);
 Route::add("POST", "/user/perbarui", UserController::class, "postPerbaruiProfil", [AuthMiddleware::class]);
+Route::add("POST", "/user/postUbahSandi", UserController::class, "postUbahSandi", [AuthMiddleware::class]);
 
 Route::gas();
