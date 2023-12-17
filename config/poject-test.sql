@@ -1,3 +1,13 @@
+-- buat database project_test
+create database project_test;
+
+-- buat database test_project_test
+create database test_project_test;
+
+-- gunakan database project_test
+use project_test;
+
+-- gunakan database test
 use test_project_test;
 
 -- buat table users
