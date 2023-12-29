@@ -22,7 +22,7 @@ class GrupTeleRepository
             $grup->id_grup,
             $grup->nama_grup,
             $grup->user_grup,
-            date("YYYY-mm-dd H:i:s")
+            date("Y-m-d H:i:s")
         ]);
 
         return $grup;
@@ -50,6 +50,13 @@ class GrupTeleRepository
         }finally{
             $statement->closeCursor();
         }
+    }
+
+    public function getAll()
+    {
+        $statement = $this->pdo->prepare("SELECT id_grup, nama_grup, user_grup, time_add FROM grup_tele");
+        $statement->execute();
+        return $statement;
     }
 
     public function hapusAll()

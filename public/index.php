@@ -2,6 +2,7 @@
 
 require_once __DIR__ . "/../vendor/autoload.php";
 use PRGANYRN\PROJECT\TEST\App\Route;
+use PRGANYRN\PROJECT\TEST\Controller\GrupController;
 use PRGANYRN\PROJECT\TEST\Controller\HomeController;
 use PRGANYRN\PROJECT\TEST\Controller\TestController;
 use PRGANYRN\PROJECT\TEST\Controller\UserController;
@@ -21,5 +22,8 @@ Route::add("GET", "/auth/logout", UserController::class, "logout", [AuthMiddlewa
 Route::add("GET", "/user/perbarui", UserController::class, "perbaruiProfil", [AuthMiddleware::class]);
 Route::add("POST", "/user/perbarui", UserController::class, "postPerbaruiProfil", [AuthMiddleware::class]);
 Route::add("POST", "/user/postUbahSandi", UserController::class, "postUbahSandi", [AuthMiddleware::class]);
+Route::add("GET", "/grup", GrupController::class, "index", [AuthMiddleware::class]);
+Route::add("GET", "/grup/tambah", GrupController::class, "daftar", [AuthMiddleware::class]);
+Route::add("POST", "/grup/tambah", GrupController::class, "postDaftar", [AuthMiddleware::class]);
 
 Route::gas();

@@ -24,6 +24,11 @@ class GrupService
     {
         $this->validasiGrupTele($request);
 
+        $grup = $this->grupRepo->findByUserId($request->id_grup);
+        if($grup != null){
+            throw new ValidationException("Grup wis ana !");
+        }
+
         try{
             Database::beginTransaction();
 
@@ -52,7 +57,7 @@ class GrupService
         if($request->id_grup == null || $request->nama_grup == null || $request->user_grup == null ||
         trim($request->id_grup) == "" || trim($request->nama_grup) == "" || trim($request->user_grup) == "")
         {
-            return new ValidationException("Aja ana sing kosong !");
+            throw new ValidationException("Aja ana sing kosong !");
         }
     }
 }

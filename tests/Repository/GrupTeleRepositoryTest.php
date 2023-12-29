@@ -26,5 +26,11 @@ class GrupTeleRepositoryTest extends TestCase
         $grup->user_grup = 'grup_test1';
 
         $this->grupRepo->simpan($grup);
+
+        $hasil = $this->grupRepo->findByUserId($grup->id_grup);
+
+        self::assertEquals('079856412', $hasil->id_grup);
+        self::assertEquals('Grup Test 1', $hasil->nama_grup);
+        self::assertEquals('grup_test1', $hasil->user_grup);
     }
 }
