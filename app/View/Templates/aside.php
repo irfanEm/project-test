@@ -64,14 +64,20 @@
             <i class="bx bx-chevron-left bx-sm align-middle"></i>
         </a>
     </div>
-
     <div class="menu-inner-shadow"></div>
     <ul class="menu-inner py-1">
         <!-- Dashboard -->
-        <li class="menu-item active">
+        <li class="menu-item <?= $act = ($model['title'] == 'Dashboard') ? 'active' : '' ?>">
             <a href="/" class="menu-link">
             <i class="menu-icon tf-icons bx bx-home-circle"></i>
             <div data-i18n="Analytics">Dashboard</div>
+            </a>
+        </li>
+        <!-- Grup Telegram -->
+        <li class="menu-item <?= $act = ($model['title'] == 'Grup') ? 'active' : '' ?>">
+            <a href="/grup" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-group"></i>
+            <div data-i18n="Analytics">Grup Telegram</div>
             </a>
         </li>
     </ul>

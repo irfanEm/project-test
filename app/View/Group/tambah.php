@@ -25,6 +25,9 @@
                         <input type="text" class="form-control" id="user_grup" name="user_grup" placeholder="t.me/grup_contoh" aria-describedby="floatingInputHelp">
                         <label for="user_grup">Username Grup</label>
                     </div>
+                    <div class="form-floating">
+                        <button type="submit" class="btn rounded-pill btn-primary">Simpan</button>
+                    </div>
                 </div>
             </div>
 
